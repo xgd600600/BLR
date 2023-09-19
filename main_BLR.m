@@ -58,7 +58,6 @@ end
 
 %Strtified learning skeleton procedure
 fprintf('LSkeR is running...\n');
-%[Result] = algrithm_skeleton(sampling_data,alpha,ns,p,maxK,n,varepsilon);
 [Result] = LSkeR(sampling_data,alpha,ns,p,maxK,n,varepsilon);
 G_skeleton = Result;
 
