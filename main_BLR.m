@@ -57,20 +57,18 @@ for i = 1:n
 end
 
 %Strtified learning skeleton procedure
-%algrithm_skeleton  = str2func(strcat(alg_name,'_skeleton_learning'));
 fprintf('LSkeR is running...\n');
 %[Result] = algrithm_skeleton(sampling_data,alpha,ns,p,maxK,n,varepsilon);
 [Result] = LSkeR(sampling_data,alpha,ns,p,maxK,n,varepsilon);
 G_skeleton = Result;
 
 %Collective skeleton orientation procedure
-%algrithm_orientation  = str2func(strcat(alg_name,'_orientation_skeleton'));
 fprintf('CSkeO is running...\n'); 
 
 %Learn and Integrate DAGs
 sum = zeros(p,p);
 for i = 1:n
-    [Result] = CSkeO(eval(['data_',num2str(i)]),G_skeleton,ns);
+    [Result] = score_orientation(eval(['data_',num2str(i)]),G_skeleton,ns);
     DAG = Result;
     sum = sum + DAG;
 end
@@ -101,7 +99,7 @@ graph = importdata(graph_path);
 fprintf('\nThe learned global causal structure is as follows.\n');
 %sparse(DAG)
 %draw_graph(DAG);
-fprintf('Arc_F1=%.4f, Arc_P=%.4f, Arc_R=%.4f£¬SHD=%.0f\n',arrhd_F1,arrhd_precision,arrhd_recall,SHD);
+fprintf('Arc_F1=%.4f, Arc_P=%.4f, Arc_R=%.4fÂ£Â¬SHD=%.0f\n',arrhd_F1,arrhd_precision,arrhd_recall,SHD);
 
 time = toc(start);
 %fprintf('\nElapsed time is %.4f seconds.\n',time);
